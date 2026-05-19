@@ -1067,14 +1067,42 @@
     <p>Talk to Nova right now or call us — and get 20% off your first installation.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
     <button 
-      onclick="document.querySelector('#retell-widget-button')?.click()" 
-      class="btn-primary">
-        🎙️ Talk to Dev (Voice AI)
-        </button>      
+    onclick="triggerNova()" 
+    class="btn-primary">
+    🎙️ Talk to Nova (Voice AI)
+    </button>     
       <a href="#nova" class="btn-ghost">🎙️ Talk to Dev</a>
     </div>
     <p style="margin-top:20px;font-size:0.8rem;color:var(--muted);">Use code <strong style="color:var(--accent)">SUMMER26</strong> for the Summer Bundle — save $80!</p>
   </div>
+
+  <script>
+  function triggerNova() {
+    // Try all possible Retell widget button selectors
+    const selectors = [
+      '[id*="retell"]',
+      '[class*="retell"]',
+      '[id*="widget-button"]',
+      '[class*="widget-button"]',
+      '[class*="fab"]',
+      'button[class*="float"]',
+    ];
+
+    for (const sel of selectors) {
+      const btn = document.querySelector(sel);
+      if (btn) {
+        btn.click();
+        return;
+      }
+    }
+
+    // Fallback — find all buttons and click the last one (widget FAB)
+    const allButtons = document.querySelectorAll('button');
+    if (allButtons.length > 0) {
+      allButtons[allButtons.length - 1].click();
+    }
+  }
+</script>
 
   <!-- ── FOOTER ── */
   <footer>
